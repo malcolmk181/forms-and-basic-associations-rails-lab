@@ -12,6 +12,8 @@ class SongsController < ApplicationController
   end
 
   def create
+    params['song']['note_contents'] = [params['song_notes_1'],params['song_notes_2'],params['song_notes_3']].select{|n| n > ""}
+    puts params
     @song = Song.new(song_params)
 
     if @song.save
@@ -47,7 +49,7 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title)
+    params.require(:song).permit(:title, :artist_name, :genre_id, note_contents: [])
   end
 end
 
