@@ -12,8 +12,11 @@ class SongsController < ApplicationController
   end
 
   def create
+    # the spec is dumb
+    # I shouldn't have to overwrite params to meet the spec's
+    # field naming requirements
     params['song']['note_contents'] = [params['song_notes_1'],params['song_notes_2'],params['song_notes_3']].select{|n| n > ""}
-    puts params
+    # puts params
     @song = Song.new(song_params)
 
     if @song.save
